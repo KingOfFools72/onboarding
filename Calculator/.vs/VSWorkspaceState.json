@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\CalculatorLib",
+    "\\CalculatorLib\\Test",
+    "\\shared",
+    "\\shared\\include",
+    "\\shared\\include\\gen",
+    "\\shared\\include\\gen64",
+    "\\shared\\lib"
+  ],
+  "SelectedNode": "\\CalculatorLib",
+  "PreviewInSolutionExplorer": false
+}
