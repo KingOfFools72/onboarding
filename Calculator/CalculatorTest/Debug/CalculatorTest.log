@@ -1,2 +1,0 @@
-﻿CalculatorLib.lib(CalculatorLib.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  CalculatorTest.vcxproj -> C:\Users\vromanov\source\repos\Calculator\Debug\CalculatorTest.exe
