@@ -3,8 +3,13 @@
 
 #include "../CalculatorLib/CalculatorLib.h"
 #include "../CalculatorLib/Commands.h"
+#include "../CalculatorLib/Async.h"
 
 #include <typeinfo>
+
+#include <boost/signals2.hpp>
+#include <boost/optional/optional_io.hpp>
+#include <boost/shared_ptr.hpp>
 
 class MockAddCommand : public ICommand
 {
@@ -46,7 +51,7 @@ TEST(ActionsTest, LoggerTest) {
 	EXPECT_EQ(output, "Current action: Add, result: 10\n");
 }
 
-TEST(CreatorsTest, DivTest) {
+TEST(CreatorsTest, Test) {
 	std::unique_ptr<IActionCreator> creator = std::make_unique<AddCreator>();
 	EXPECT_EQ(typeid(*creator->getAction()), typeid(Add));
 
@@ -60,7 +65,7 @@ TEST(CreatorsTest, DivTest) {
 	EXPECT_EQ(typeid(*creator->getAction()), typeid(Mul));
 }
 
-TEST(InvokerTest, DivTest) {
+TEST(InvokerTest, Test) {
 
 	MockAddCommand mac;
 	MockSubCommand msc;
@@ -74,6 +79,37 @@ TEST(InvokerTest, DivTest) {
 	inv.executeCommand(2, 4);
 	inv.executeCommand(2, 4);
 	inv.executeCommand(2, 4);
+}
+
+TEST(AsyncTest, Test) {
+
+	//boost::signals2::signal<int(int, int)> sig,
+	//	aggregate_values<std::vector<std::pair<int,int>>>>;
+	//
+	//Add ad;
+
+	//sig.connect(&Add::calculate);
+	//std::queue<IAction> que;
+	//que.push(Add());
+	//que.front().calculate(3, 4);
+
+
+	//
+	//std::cout << sig.num_slots() << std::endl;
+	//sig(1,2);
+    /*sig.connect(&Add::calculate);
+	sig.connect(&Sub::calculate);
+	sig.connect(&Mul::calculate);*/
+	//sig(2,5);
+	//std::vector<std::pair<int, int>> res = sig(2, 5);
+
+	//EXPECT_EQ(res[0].first, 0);
+	//EXPECT_EQ(res[1].first, 1);
+	//EXPECT_EQ(res[2].first, 2);
+
+	//EXPECT_EQ(res[0].second, 2 + 5);
+	//EXPECT_EQ(res[1].second, 2 - 5);
+	//EXPECT_EQ(res[2].second, 2 * 5);
 }
 
 int main(int argc, char** argv)

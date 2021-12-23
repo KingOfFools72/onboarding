@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CalculatorLib", "Calculator
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CalculatorTest", "CalculatorTest\CalculatorTest.vcxproj", "{217F8E09-01F4-4593-A82C-044A33E5E67B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CalculatorClient", "CalculatorClient\CalculatorClient.vcxproj", "{A7566D01-09C4-4123-A0A8-ECE735302946}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -47,6 +49,14 @@ Global
 		{217F8E09-01F4-4593-A82C-044A33E5E67B}.Release|x64.Build.0 = Release|x64
 		{217F8E09-01F4-4593-A82C-044A33E5E67B}.Release|x86.ActiveCfg = Release|Win32
 		{217F8E09-01F4-4593-A82C-044A33E5E67B}.Release|x86.Build.0 = Release|Win32
+		{A7566D01-09C4-4123-A0A8-ECE735302946}.Debug|x64.ActiveCfg = Debug|x64
+		{A7566D01-09C4-4123-A0A8-ECE735302946}.Debug|x64.Build.0 = Debug|x64
+		{A7566D01-09C4-4123-A0A8-ECE735302946}.Debug|x86.ActiveCfg = Debug|Win32
+		{A7566D01-09C4-4123-A0A8-ECE735302946}.Debug|x86.Build.0 = Debug|Win32
+		{A7566D01-09C4-4123-A0A8-ECE735302946}.Release|x64.ActiveCfg = Release|x64
+		{A7566D01-09C4-4123-A0A8-ECE735302946}.Release|x64.Build.0 = Release|x64
+		{A7566D01-09C4-4123-A0A8-ECE735302946}.Release|x86.ActiveCfg = Release|Win32
+		{A7566D01-09C4-4123-A0A8-ECE735302946}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +69,7 @@ Global
 		{8F32F511-1C89-4549-A533-9EFCAE05D031} = {CB9DF109-C2C5-4811-83D4-09E02999AE5E}
 		{973D803C-11C6-4568-8118-DA1D7D32392B} = {6E3459AD-41F8-4ED9-B3F0-35E6615BE1A9}
 		{217F8E09-01F4-4593-A82C-044A33E5E67B} = {2AE28048-B304-4C27-982D-C513D6498CAD}
+		{A7566D01-09C4-4123-A0A8-ECE735302946} = {6E3459AD-41F8-4ED9-B3F0-35E6615BE1A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6AD596D-D574-4A8D-83D7-0FBFFB5A95A5}
