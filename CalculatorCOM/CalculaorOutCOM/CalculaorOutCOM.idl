@@ -1,0 +1,40 @@
+// CalculaorOutCOM.idl : IDL source for CalculaorOutCOM
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (CalculaorOutCOM.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(a86ef719-dfde-4182-832b-ff2fba85fa62),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IOutCalculator : IDispatch
+{
+	[id(1)] HRESULT Add([in] UINT a, [in] UINT b, [out, retval] UINT* res);
+	[id(2)] HRESULT Sub([in] UINT a, [in] UINT b, [out, retval] UINT* res);
+	[id(3)] HRESULT Div([in] UINT a, [in] UINT b, [out, retval] UINT* res);
+	[id(4)] HRESULT Mul([in] UINT a, [in] UINT b, [out, retval] UINT* res);
+};
+[
+	uuid(8dd22155-99e0-481e-ad26-3b5b63fd556d),
+	version(1.0),
+]
+library CalculaorOutCOMLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(5202bb07-7aaa-4611-8f76-0dbe917ec5d9)
+	]
+	coclass OutCalculator
+	{
+		[default] interface IOutCalculator;
+	};
+};
+
+import "shobjidl.idl";

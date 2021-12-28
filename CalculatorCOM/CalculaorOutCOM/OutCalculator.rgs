@@ -1,0 +1,16 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {5202bb07-7aaa-4611-8f76-0dbe917ec5d9} = s 'OutCalculator class'
+		{
+			ForceRemove Programmable
+			LocalServer32 = s '%MODULE%'
+			{
+				val ServerExecutable = s '%MODULE_RAW%'
+			}
+			TypeLib = s '{8dd22155-99e0-481e-ad26-3b5b63fd556d}'
+			Version = s '1.0'
+		}
+	}
+}

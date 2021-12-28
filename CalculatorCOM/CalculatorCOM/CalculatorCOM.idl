@@ -1,0 +1,40 @@
+// CalculatorCOM.idl : IDL source for CalculatorCOM
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (CalculatorCOM.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(883435eb-be42-4e1c-87bc-4e79a4e74e5d),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IInCOMCalculator : IDispatch
+{
+	[id(1)] HRESULT Add([in] UINT a, [in] UINT b, [out, retval] UINT* res);
+	[id(2)] HRESULT Sub([in] UINT a, [in] UINT b, [out, retval] UINT* res);
+	[id(3)] HRESULT Div([in] UINT a, [in] UINT b, [out, retval] UINT* res);
+	[id(4)] HRESULT Mul([in] UINT a, [in] UINT b, [out, retval] UINT* res);
+};
+[
+	uuid(5ce12cce-e619-45b4-ba61-5e5e11724659),
+	version(1.0),
+]
+library CalculatorCOMLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(98b0410e-9575-48e6-8419-f4bc9dd4fa36)
+	]
+	coclass InCOMCalculator
+	{
+		[default] interface IInCOMCalculator;
+	};
+};
+
+import "shobjidl.idl";
