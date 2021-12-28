@@ -5,15 +5,49 @@
 #include "framework.h"
 #include "CalculatorLib.h"
 
-void Invoker::addCommand(ICommand& command) {
-	que.push(&command);
-}
+#include <iostream>
 
-void Invoker::executeCommand(int a, int b)
+void Calculator::AddCommand(CalculatorCommand command)
 {
-	if (!que.empty())
+	commands.push(std::move(command));
+	++index;
+	sig.connect(std::bind(&CalculatorCommand::execute, std::ref(commands.back())));
+};
+
+void Calculator::Compute()
+{
+	sig();
+
+	while (!commands.empty())
 	{
-		que.front()->execute(a, b);
-		que.pop();
+		resultMessages.push_back(commands.front().GetLogMessage());
+		resultNumbers.push_back(commands.front().GetResultNumber());
+		commands.pop();
 	}
-}
+};
+
+void Calculator::PrintResultMessages() const
+{
+	for (const auto& str : resultMessages)
+	{
+		std::cout << str << '\n';
+	}
+};
+
+void Calculator::PrintResultNumbers() const
+{
+	for (const auto& number : resultNumbers)
+	{
+		std::cout << number << '\n';
+	}
+};
+
+const std::vector<std::string>& Calculator::GetResultMessages() const
+{
+	return resultMessages;
+};
+
+const std::vector<int>& Calculator::GetResultNumbers() const
+{
+	return resultNumbers;
+};

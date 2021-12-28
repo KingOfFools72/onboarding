@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-int NullAction::calculate(int a, int b) {
+int NullAction::calculate() {
 	calcRes = INT_MAX;
 	return calcRes;
 }
@@ -12,8 +12,8 @@ void NullAction::write(std::string& log) {
 	std::cout << log << std::endl;
 }
 
-int Add::calculate(int a, int b) {
-	calcRes = a + b;
+int Add::calculate() {
+	calcRes = lhs_ + rhs_;
 	return calcRes;
 }
 
@@ -21,8 +21,8 @@ void Add::write(std::string& log) {
 	std::cout << log << std::endl;
 }
 
-int Sub::calculate(int a, int b) {
-	calcRes = a - b;
+int Sub::calculate() {
+	calcRes = lhs_ - rhs_;
 	return calcRes;
 }
 
@@ -30,8 +30,12 @@ void Sub::write(std::string& log) {
 	std::cout << log << std::endl;
 }
 
-int Div::calculate(int a, int b) {
-	calcRes = a / b;
+int Div::calculate() {
+	if (rhs_ == 0)
+	{
+		throw std::invalid_argument("Denominator mustn't be a zero!");
+	}
+	calcRes = lhs_ / rhs_;
 	return calcRes;
 }
 
@@ -39,8 +43,8 @@ void Div::write(std::string& log) {
 	std::cout << log << std::endl;
 }
 
-int Mul::calculate(int a, int b) {
-	calcRes = a * b;
+int Mul::calculate() {
+	calcRes = lhs_ * rhs_;
 	return calcRes;
 }
 

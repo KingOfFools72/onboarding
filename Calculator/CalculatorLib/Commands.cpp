@@ -1,18 +1,18 @@
 #include "pch.h"
 #include "Commands.h"
 
-void AddCommand::execute(int a, int b) {
-	creator->getAction()->calculate(a, b);
-}
+void CalculatorCommand::execute()
+{
+	result = creator->getAction()->calculate();
+	message = creator->getAction()->log();
+};
 
-void SubCommand::execute(int a, int b) {
-	creator->getAction()->calculate(a, b);
-}
+const std::string& CalculatorCommand::GetLogMessage() const
+{
+	return message;
+};
 
-void DivCommand::execute(int a, int b) {
-	creator->getAction()->calculate(a, b);
-}
-
-void MulCommand::execute(int a, int b) {
-	creator->getAction()->calculate(a, b);
+const int CalculatorCommand::GetResultNumber() const
+{
+	return result;
 }

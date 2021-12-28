@@ -4,9 +4,7 @@
 #include <memory>
 #include <string>
 
-#include "../CalculatorLib/Commands.h"
-
-
+#include <Commands.h>
 
 namespace po = boost::program_options;
 
@@ -39,32 +37,28 @@ int main(int argc, char** argv)
     }
 
     if (vm.count("action")) {
-        std::string actionStr = vm["action"].as<std::string>();
-        std::unique_ptr<IAction> act = nullptr;
-        if (actionStr == "Add") act = std::make_unique<Add>();
-        if (actionStr == "Sub") act = std::make_unique<Sub>();
-        if (actionStr == "Div") act = std::make_unique<Div>();
-        if (actionStr == "Mul") act = std::make_unique<Mul>();
-
-        if (act != nullptr)
+        if (vm.count("first"))
         {
-            if (vm.count("first"))
+            if (vm.count("second"))
             {
-                //std::cout << "First " << vm["first"].as<int>() << "\n";
+                std::string actionStr = vm["action"].as<std::string>();                
                 int a = vm["first"].as<int>();
-                if (vm.count("second"))
-                {
-                    //std::cout << "Second " << vm["second"].as<int>() << "\n";
-                    int b = vm["second"].as<int>();
-                    res = act->calculate(a, b);
-                }
-                else {
-                    std::cout << "Second param was not set.\n";
-                }
+                int b = vm["second"].as<int>();
+                std::unique_ptr<IAction> act = nullptr;
+
+                if (actionStr == "Add") act = std::make_unique<Add>(a, b);
+                if (actionStr == "Sub") act = std::make_unique<Sub>(a, b);
+                if (actionStr == "Div") act = std::make_unique<Div>(a, b);
+                if (actionStr == "Mul") act = std::make_unique<Mul>(a, b);
+
+                res = act->calculate();
             }
             else {
-                std::cout << "First param was not set.\n";
+                std::cout << "Second param was not set.\n";
             }
+        }
+        else {
+            std::cout << "First param was not set.\n";
         }
     }
     else {
