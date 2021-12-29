@@ -1,0 +1,60 @@
+// ScalableCalculatorCOMEvents.idl : IDL source for ScalableCalculatorCOMEvents
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ScalableCalculatorCOMEvents.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(7a11d31a-c3a9-44c3-b34d-fcc218b971c4),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface ICalculator : IDispatch
+{
+	[id(1)] HRESULT Compute([in] CHAR action, [in] LONGLONG lhs, [in] LONGLONG rhs, [out, retval] LONGLONG* res);
+};
+[
+	uuid(08760004-aed2-4f9b-9f2d-db519096ca78),
+	version(1.0),
+]
+library ScalableCalculatorCOMEventsLib
+{
+	typedef enum Events
+	{
+		DISPID_ADD = 1,
+		DISPID_SUBTRACT = 2,
+		DISPID_MULTIPLY = 3,
+		DISPID_DIVIDE = 4,
+		DISPID_NOTHING = 5
+	} Events;
+
+	importlib("stdole2.tlb");
+	[
+		uuid(2689808c-b645-4b8b-ad4b-38b34f1bc12b)
+	]
+	dispinterface _ICalculatorEvents
+	{
+		properties:
+		methods:
+			[id(DISPID_ADD)] void OnAdd([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
+			[id(DISPID_SUBTRACT)] void OnSubtract([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
+			[id(DISPID_MULTIPLY)] void OnMultiply([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
+			[id(DISPID_DIVIDE)] void OnDivide([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
+			[id(DISPID_NOTHING)] void Nothing([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
+	};
+	[
+		uuid(86d4af8c-ffdc-4317-b120-bf76fac5cd6f)
+	]
+	coclass Calculator
+	{
+		[default] interface ICalculator;
+		[default, source] dispinterface _ICalculatorEvents;
+	};
+};
+
+import "shobjidl.idl";
