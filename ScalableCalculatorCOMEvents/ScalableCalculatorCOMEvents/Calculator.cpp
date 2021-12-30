@@ -5,25 +5,25 @@
 
 // CCalculator
 
-STDMETHODIMP CCalculator::Compute(CHAR action, LONGLONG lhs, LONGLONG rhs, LONGLONG* res)
+STDMETHODIMP CCalculator::Compute(const CHAR action, const LONGLONG lhs, const LONGLONG rhs)
 {
 	if (action == '+')
 	{
-		return Fire_Event(DISPID_ADD, lhs, rhs, res);
+		return Fire_Event(DISPID_ADD, lhs, rhs);
 	}
 	else if (action == '-')
 	{
-		return Fire_Event(DISPID_SUBTRACT, lhs, rhs, res);
+		return Fire_Event(DISPID_SUBTRACT, lhs, rhs);
 	}
 	else if (action == '*')
 	{
-		return Fire_Event(DISPID_MULTIPLY, lhs, rhs, res);
+		return Fire_Event(DISPID_MULTIPLY, lhs, rhs);
 	}
 	else if (action == '/')
 	{
-		return Fire_Event(DISPID_DIVIDE, lhs, rhs, res);
+		return Fire_Event(DISPID_DIVIDE, lhs, rhs);
 	}
 	else {
-		return Fire_Event(DISPID_NOTHING, lhs, rhs, res);
+		return Fire_Event(DISPID_NOTHING, lhs, rhs);
 	}
 }

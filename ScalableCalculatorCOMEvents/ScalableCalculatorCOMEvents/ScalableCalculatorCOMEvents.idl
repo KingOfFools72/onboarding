@@ -16,7 +16,7 @@ import "ocidl.idl";
 ]
 interface ICalculator : IDispatch
 {
-	[id(1)] HRESULT Compute([in] CHAR action, [in] LONGLONG lhs, [in] LONGLONG rhs, [out, retval] LONGLONG* res);
+	[id(1)] HRESULT Compute([in] CHAR action, [in] LONGLONG lhs, [in] LONGLONG rhs);
 };
 [
 	uuid(08760004-aed2-4f9b-9f2d-db519096ca78),
@@ -41,11 +41,11 @@ library ScalableCalculatorCOMEventsLib
 	{
 		properties:
 		methods:
-			[id(DISPID_ADD)] void OnAdd([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
-			[id(DISPID_SUBTRACT)] void OnSubtract([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
-			[id(DISPID_MULTIPLY)] void OnMultiply([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
-			[id(DISPID_DIVIDE)] void OnDivide([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
-			[id(DISPID_NOTHING)] void Nothing([in] LONGLONG lhs,[in] LONGLONG rhs,[out, retval] LONGLONG* res);
+			[id(DISPID_ADD)] void OnAdd([in] const LONGLONG lhs,[in] const LONGLONG rhs);
+			[id(DISPID_SUBTRACT)] void OnSubtract([in] const LONGLONG lhs,[in] const LONGLONG rhs);
+			[id(DISPID_MULTIPLY)] void OnMultiply([in] const LONGLONG lhs,[in] const LONGLONG rhs);
+			[id(DISPID_DIVIDE)] void OnDivide([in] const LONGLONG lhs,[in] const LONGLONG rhs);
+			[id(DISPID_NOTHING)] void Nothing([in] const LONGLONG lhs,[in] const LONGLONG rhs);
 	};
 	[
 		uuid(86d4af8c-ffdc-4317-b120-bf76fac5cd6f)

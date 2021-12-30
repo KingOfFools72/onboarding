@@ -3,8 +3,10 @@
 #include "CalculatorLib.h"
 #include "CCalculatorImpl.h"
 
-CCalculatorClient::CCalculatorClient(CComPtr<ICalculator>& source)
-	: m_spImpl(std::make_unique<CCalculatorImpl>(source)) {}
+CCalculatorClient::CCalculatorClient(CComPtr<ICalculator> source)
+	: m_spImpl(std::make_unique<CCalculatorImpl>(source)){}
+
+CCalculatorClient::~CCalculatorClient() = default;
 
 CCalculatorClient::CCalculatorClient(CCalculatorClient&& other)
 {
@@ -15,16 +17,6 @@ CCalculatorClient& CCalculatorClient::operator=(CCalculatorClient&& other)
 {
 	m_spImpl.reset(other.m_spImpl.get());
 	return *this;
-}
-
-HRESULT CCalculatorClient::Subscribe()
-{
-	return m_spImpl->Subscribe();
-}
-
-HRESULT CCalculatorClient::Unsubscribe()
-{
-	return m_spImpl->Unsubscribe();
 }
 
 void CCalculatorClient::PrintAllLogMessages() const
@@ -42,29 +34,27 @@ const std::vector<int>& CCalculatorClient::GetAllComputations() const
 	return m_spImpl->GetAllComputations();
 }
 
-void CCalculatorClient::OnAdd(LONGLONG lhs, LONGLONG rhs, LONGLONG* res)
+void CCalculatorClient::OnAdd(const LONGLONG lhs, const LONGLONG rhs)
 {
-	m_spImpl->OnAdd(lhs, rhs, res);
+	m_spImpl->OnAdd(lhs, rhs);
 }
 
-void CCalculatorClient::OnSubtract(LONGLONG lhs, LONGLONG rhs, LONGLONG* res)
+void CCalculatorClient::OnSubtract(const LONGLONG lhs, const LONGLONG rhs)
 {
-	m_spImpl->OnSubtract(lhs, rhs, res);
+	m_spImpl->OnSubtract(lhs, rhs);
 }
 
-void CCalculatorClient::OnMultiply(LONGLONG lhs, LONGLONG rhs, LONGLONG* res)
+void CCalculatorClient::OnMultiply(const LONGLONG lhs, const LONGLONG rhs)
 {
-	m_spImpl->OnMultiply(lhs, rhs, res);
+	m_spImpl->OnMultiply(lhs, rhs);
 }
 
-void CCalculatorClient::OnDivide(LONGLONG lhs, LONGLONG rhs, LONGLONG* res)
+void CCalculatorClient::OnDivide(const LONGLONG lhs, const LONGLONG rhs)
 {
-	m_spImpl->OnDivide(lhs, rhs, res);
+	m_spImpl->OnDivide(lhs, rhs);
 }
 
-void CCalculatorClient::DoNothing(LONGLONG lhs, LONGLONG rhs, LONGLONG* res)
+void CCalculatorClient::DoNothing(const LONGLONG lhs, const LONGLONG rhs)
 {
-	m_spImpl->DoNothing(lhs, rhs, res);
+	m_spImpl->DoNothing(lhs, rhs);
 }
-
-CCalculatorClient::~CCalculatorClient() = default;

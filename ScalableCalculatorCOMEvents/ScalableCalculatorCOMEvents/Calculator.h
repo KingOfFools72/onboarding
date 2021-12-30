@@ -56,7 +56,7 @@ public:
 	}
 
 public:
-	STDMETHOD(Compute)(CHAR action, LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
+	STDMETHOD(Compute)(const CHAR action, const LONGLONG lhs, const LONGLONG rhs);
 
 };
 

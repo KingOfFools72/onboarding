@@ -23,18 +23,14 @@ public:
 		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), DISPID_NOTHING, DoNothing)
 	END_SINK_MAP();
 
-	CCalculatorImpl();
-	CCalculatorImpl(CComPtr<ICalculator>& source);
+	CCalculatorImpl(CComPtr<ICalculator> source);
 
-	HRESULT Subscribe();
-	HRESULT Unsubscribe();
-
-	LONGLONG GetResult(std::unique_ptr<NativeCalculator::IActionCreator> action, int lhs, int rhs);
-	void __stdcall OnAdd(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
-	void __stdcall OnSubtract(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
-	void __stdcall OnMultiply(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
-	void __stdcall OnDivide(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
-	void __stdcall DoNothing(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
+	LONGLONG GetResult(std::unique_ptr<NativeCalculator::IActionCreator> action);
+	void __stdcall OnAdd(const LONGLONG lhs, const LONGLONG rhs);
+	void __stdcall OnSubtract(const LONGLONG lhs, const LONGLONG rhs);
+	void __stdcall OnMultiply(const LONGLONG lhs, const LONGLONG rhs);
+	void __stdcall OnDivide(const LONGLONG lhs, const LONGLONG rhs);
+	void __stdcall DoNothing(const LONGLONG lhs, const LONGLONG rhs);
 
 	void PrintAllLogMessages() const;
 	void PrintAllResultNumbers() const;
@@ -42,8 +38,12 @@ public:
 	~CCalculatorImpl();
 
 private:
-	bool m_isSubsribed = false;
+	bool m_isSubsribed;
 	CComPtr<ICalculator> m_spCalcSource;
-	CComPtr<IUnknown> m_spUnk;
 	NativeCalculator::Calculator m_calc;
+
+	CComQIPtr<ICalculator> pCalcSource;
+
+	HRESULT Subscribe();
+	HRESULT Unsubscribe();
 };

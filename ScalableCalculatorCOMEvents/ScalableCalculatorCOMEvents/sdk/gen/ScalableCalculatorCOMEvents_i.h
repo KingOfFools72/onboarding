@@ -98,8 +98,7 @@ EXTERN_C const IID IID_ICalculator;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Compute( 
             /* [in] */ CHAR action,
             /* [in] */ LONGLONG lhs,
-            /* [in] */ LONGLONG rhs,
-            /* [retval][out] */ LONGLONG *res) = 0;
+            /* [in] */ LONGLONG rhs) = 0;
         
     };
     
@@ -163,8 +162,7 @@ EXTERN_C const IID IID_ICalculator;
             ICalculator * This,
             /* [in] */ CHAR action,
             /* [in] */ LONGLONG lhs,
-            /* [in] */ LONGLONG rhs,
-            /* [retval][out] */ LONGLONG *res);
+            /* [in] */ LONGLONG rhs);
         
         END_INTERFACE
     } ICalculatorVtbl;
@@ -202,8 +200,8 @@ EXTERN_C const IID IID_ICalculator;
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define ICalculator_Compute(This,action,lhs,rhs,res)	\
-    ( (This)->lpVtbl -> Compute(This,action,lhs,rhs,res) ) 
+#define ICalculator_Compute(This,action,lhs,rhs)	\
+    ( (This)->lpVtbl -> Compute(This,action,lhs,rhs) ) 
 
 #endif /* COBJMACROS */
 

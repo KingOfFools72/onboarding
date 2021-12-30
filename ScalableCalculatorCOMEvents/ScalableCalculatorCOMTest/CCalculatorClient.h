@@ -2,7 +2,6 @@
 
 #include <atlbase.h>
 #include <atlcom.h>
-#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -16,15 +15,13 @@ class CCalculatorImpl;
 class CCalculatorClient
 {
 public:
-	CCalculatorClient(CComPtr<ICalculator>& source);
+	CCalculatorClient(CComPtr<ICalculator> source);
 	CCalculatorClient(const CCalculatorClient& other) = delete;
 	CCalculatorClient& operator=(const CCalculatorClient& other) = delete;
 	CCalculatorClient(CCalculatorClient&& other);
 	CCalculatorClient& operator=(CCalculatorClient&& other);
 	~CCalculatorClient();
 
-	HRESULT Subscribe();
-	HRESULT Unsubscribe();
 	void PrintAllLogMessages() const;
 	void PrintAllResultNumbers() const;
 	const std::vector<int>& GetAllComputations() const;
@@ -32,9 +29,9 @@ public:
 private:
 	std::unique_ptr<CCalculatorImpl> m_spImpl;
 
-	void OnAdd(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
-	void OnSubtract(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
-	void OnMultiply(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
-	void OnDivide(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
-	void DoNothing(LONGLONG lhs, LONGLONG rhs, LONGLONG* res);
+	void OnAdd(const LONGLONG lhs, const LONGLONG rhs);
+	void OnSubtract(const LONGLONG lhs, const LONGLONG rhs);
+	void OnMultiply(const LONGLONG lhs, const LONGLONG rhs);
+	void OnDivide(const LONGLONG lhs, const LONGLONG rhs);
+	void DoNothing(const LONGLONG lhs, const LONGLONG rhs);
 };
