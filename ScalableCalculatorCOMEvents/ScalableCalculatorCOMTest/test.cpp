@@ -5,7 +5,7 @@
 CComModule _Module;
 extern __declspec(selectany) CAtlModule* _pAtlModule = &_Module;
 
-CComPtr<ICalculator> g_spSource;
+CComPtr<ICalculatorEv> g_spSource;
 
 TEST(calculator_methods_test, add)
 {

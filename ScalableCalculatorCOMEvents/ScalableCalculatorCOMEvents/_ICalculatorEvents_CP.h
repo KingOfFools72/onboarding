@@ -3,7 +3,7 @@
 #import "ScalableCalculatorCOMEvents.tlb" raw_interfaces_only
 
 using namespace ATL;
-using namespace ScalableCalculatorCOMEventsLib;
+using namespace ScalableCalculatorCOMLib;
 
 template <class T>
 class CProxy_ICalculatorEvents : public IConnectionPointImpl<T, &__uuidof(_ICalculatorEvents), CComDynamicUnkArray>

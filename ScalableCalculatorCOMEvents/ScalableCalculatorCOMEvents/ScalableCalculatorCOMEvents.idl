@@ -8,30 +8,31 @@ import "oaidl.idl";
 import "ocidl.idl";
 
 [
-	object,
-	uuid(7a11d31a-c3a9-44c3-b34d-fcc218b971c4),
-	dual,
-	nonextensible,
-	pointer_default(unique)
-]
-interface ICalculator : IDispatch
-{
-	[id(1)] HRESULT Compute([in] CHAR action, [in] LONGLONG lhs, [in] LONGLONG rhs);
-};
-[
 	uuid(08760004-aed2-4f9b-9f2d-db519096ca78),
 	version(1.0),
 ]
-library ScalableCalculatorCOMEventsLib
+library ScalableCalculatorCOMLib
 {
 	typedef enum Events
 	{
-		DISPID_ADD = 1,
-		DISPID_SUBTRACT = 2,
-		DISPID_MULTIPLY = 3,
-		DISPID_DIVIDE = 4,
-		DISPID_NOTHING = 5
+		EVID_ADD = 1,
+		EVID_SUBTRACT = 2,
+		EVID_MULTIPLY = 3,
+		EVID_DIVIDE = 4,
+		EVID_NOTHING = 5
 	} Events;
+
+	[
+		object,
+		uuid(7a11d31a-c3a9-44c3-b34d-fcc218b971c4),
+		dual,
+		nonextensible,
+		pointer_default(unique)
+	]
+	interface ICalculatorEv : IDispatch
+	{
+		[id(1)] HRESULT Compute([in] CHAR action, [in] LONGLONG lhs, [in] LONGLONG rhs);
+	};
 
 	importlib("stdole2.tlb");
 	[
@@ -41,20 +42,19 @@ library ScalableCalculatorCOMEventsLib
 	{
 		properties:
 		methods:
-			[id(DISPID_ADD)] void OnAdd([in] const LONGLONG lhs,[in] const LONGLONG rhs);
-			[id(DISPID_SUBTRACT)] void OnSubtract([in] const LONGLONG lhs,[in] const LONGLONG rhs);
-			[id(DISPID_MULTIPLY)] void OnMultiply([in] const LONGLONG lhs,[in] const LONGLONG rhs);
-			[id(DISPID_DIVIDE)] void OnDivide([in] const LONGLONG lhs,[in] const LONGLONG rhs);
-			[id(DISPID_NOTHING)] void Nothing([in] const LONGLONG lhs,[in] const LONGLONG rhs);
+			[id(EVID_ADD)] void OnAdd([in] const LONGLONG lhs,[in] const LONGLONG rhs);
+			[id(EVID_SUBTRACT)] void OnSubtract([in] const LONGLONG lhs,[in] const LONGLONG rhs);
+			[id(EVID_MULTIPLY)] void OnMultiply([in] const LONGLONG lhs,[in] const LONGLONG rhs);
+			[id(EVID_DIVIDE)] void OnDivide([in] const LONGLONG lhs,[in] const LONGLONG rhs);
+			[id(EVID_NOTHING)] void Nothing([in] const LONGLONG lhs,[in] const LONGLONG rhs);
 	};
+
 	[
 		uuid(86d4af8c-ffdc-4317-b120-bf76fac5cd6f)
 	]
 	coclass Calculator
 	{
-		[default] interface ICalculator;
+		[default] interface ICalculatorEv;
 		[default, source] dispinterface _ICalculatorEvents;
 	};
 };
-
-import "shobjidl.idl";

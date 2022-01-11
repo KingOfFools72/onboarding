@@ -7,23 +7,23 @@
 #import "ScalableCalculatorCOMEvents.tlb" raw_interfaces_only
 
 using namespace ATL;
-using namespace ScalableCalculatorCOMEventsLib;
+using namespace ScalableCalculatorCOMLib;
 
-class CCalculatorImpl;
-typedef IDispEventImpl<0, CCalculatorImpl, &__uuidof(_ICalculatorEvents), &__uuidof(__ScalableCalculatorCOMEventsLib), 1, 0> CalcEventsImpl;
+class CCalculatorEventsImpl;
+typedef IDispEventImpl<0, CCalculatorEventsImpl, &__uuidof(_ICalculatorEvents), &__uuidof(__ScalableCalculatorCOMLib), 1, 0> CalcEventsImpl;
 
-class CCalculatorImpl : public CalcEventsImpl
+class CCalculatorEventsImpl : public CalcEventsImpl
 {
 public:
-	BEGIN_SINK_MAP(CCalculatorImpl)
-		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), DISPID_ADD, OnAdd)
-		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), DISPID_SUBTRACT, OnSubtract)
-		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), DISPID_MULTIPLY, OnMultiply)
-		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), DISPID_DIVIDE, OnDivide)
-		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), DISPID_NOTHING, DoNothing)
+	BEGIN_SINK_MAP(CCalculatorEventsImpl)
+		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), EVID_ADD, OnAdd)
+		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), EVID_SUBTRACT, OnSubtract)
+		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), EVID_MULTIPLY, OnMultiply)
+		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), EVID_DIVIDE, OnDivide)
+		SINK_ENTRY_EX(0, __uuidof(_ICalculatorEvents), EVID_NOTHING, DoNothing)
 	END_SINK_MAP();
 
-	CCalculatorImpl(CComPtr<ICalculator> source);
+	CCalculatorEventsImpl(CComPtr<ICalculatorEv> source);
 
 	LONGLONG GetResult(std::unique_ptr<NativeCalculator::IActionCreator> action);
 	void __stdcall OnAdd(const LONGLONG lhs, const LONGLONG rhs);
@@ -35,15 +35,12 @@ public:
 	void PrintAllLogMessages() const;
 	void PrintAllResultNumbers() const;
 	const std::vector<int>& GetAllComputations() const;
-	~CCalculatorImpl();
+	~CCalculatorEventsImpl();
 
 private:
-	bool m_isSubsribed;
-	CComPtr<ICalculator> m_spCalcSource;
+	CComPtr<ICalculatorEv> m_spCalcSource;
 	NativeCalculator::Calculator m_calc;
 
-	CComQIPtr<ICalculator> pCalcSource;
-
-	HRESULT Subscribe();
-	HRESULT Unsubscribe();
+	void Subscribe();
+	void Unsubscribe();
 };

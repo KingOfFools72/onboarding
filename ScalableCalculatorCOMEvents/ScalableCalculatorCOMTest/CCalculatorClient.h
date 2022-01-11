@@ -8,14 +8,14 @@
 #import "ScalableCalculatorCOMEvents.tlb" raw_interfaces_only
 
 using namespace ATL;
-using namespace ScalableCalculatorCOMEventsLib;
+using namespace ScalableCalculatorCOMLib;
 
-class CCalculatorImpl;
+class CCalculatorEventsImpl;
 
 class CCalculatorClient
 {
 public:
-	CCalculatorClient(CComPtr<ICalculator> source);
+	CCalculatorClient(CComPtr<ICalculatorEv> source);
 	CCalculatorClient(const CCalculatorClient& other) = delete;
 	CCalculatorClient& operator=(const CCalculatorClient& other) = delete;
 	CCalculatorClient(CCalculatorClient&& other);
@@ -27,7 +27,7 @@ public:
 	const std::vector<int>& GetAllComputations() const;
 
 private:
-	std::unique_ptr<CCalculatorImpl> m_spImpl;
+	std::unique_ptr<CCalculatorEventsImpl> m_spImpl;
 
 	void OnAdd(const LONGLONG lhs, const LONGLONG rhs);
 	void OnSubtract(const LONGLONG lhs, const LONGLONG rhs);

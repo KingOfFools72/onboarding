@@ -3,8 +3,8 @@
 #include "CalculatorLib.h"
 #include "CCalculatorImpl.h"
 
-CCalculatorClient::CCalculatorClient(CComPtr<ICalculator> source)
-	: m_spImpl(std::make_unique<CCalculatorImpl>(source)){}
+CCalculatorClient::CCalculatorClient(CComPtr<ICalculatorEv> source)
+	: m_spImpl(std::make_unique<CCalculatorEventsImpl>(source)){}
 
 CCalculatorClient::~CCalculatorClient() = default;
 

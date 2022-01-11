@@ -13,7 +13,7 @@
 #endif
 
 using namespace ATL;
-using namespace ScalableCalculatorCOMEventsLib;
+using namespace ScalableCalculatorCOMLib;
 
 // CCalculator
 
@@ -22,19 +22,15 @@ class ATL_NO_VTABLE CCalculator :
 	public CComCoClass<CCalculator, &__uuidof(Calculator)>,
 	public IConnectionPointContainerImpl<CCalculator>,
 	public CProxy_ICalculatorEvents<CCalculator>,
-	public IDispatchImpl<ICalculator, &__uuidof(ICalculator), &__uuidof(__ScalableCalculatorCOMEventsLib), /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<ICalculatorEv, &__uuidof(ICalculatorEv), &__uuidof(__ScalableCalculatorCOMLib), /*wMajor =*/ 1, /*wMinor =*/ 0>
 {
 public:
-	CCalculator()
-	{
+	CCalculator();
 
-	}
-
-	DECLARE_REGISTRY_RESOURCEID(106)
-
+	DECLARE_REGISTRY_RESOURCEID(IDR_CALCULATOR)
 
 	BEGIN_COM_MAP(CCalculator)
-		COM_INTERFACE_ENTRY(ICalculator)
+		COM_INTERFACE_ENTRY(ICalculatorEv)
 		COM_INTERFACE_ENTRY(IDispatch)
 		COM_INTERFACE_ENTRY(IConnectionPointContainer)
 	END_COM_MAP()
@@ -46,14 +42,9 @@ public:
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+	HRESULT FinalConstruct();
 
-	void FinalRelease()
-	{
-	}
+	void FinalRelease();
 
 public:
 	STDMETHOD(Compute)(const CHAR action, const LONGLONG lhs, const LONGLONG rhs);

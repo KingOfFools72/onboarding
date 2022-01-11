@@ -30,10 +30,6 @@
 #error this stub requires an updated version of <rpcndr.h>
 #endif /* __RPCNDR_H_VERSION__ */
 
-#ifndef COM_NO_WINDOWS_H
-#include "windows.h"
-#include "ole2.h"
-#endif /*COM_NO_WINDOWS_H*/
 
 #ifndef __ScalableCalculatorCOMEvents_i_h__
 #define __ScalableCalculatorCOMEvents_i_h__
@@ -44,11 +40,11 @@
 
 /* Forward Declarations */ 
 
-#ifndef __ICalculator_FWD_DEFINED__
-#define __ICalculator_FWD_DEFINED__
-typedef interface ICalculator ICalculator;
+#ifndef __ICalculatorEv_FWD_DEFINED__
+#define __ICalculatorEv_FWD_DEFINED__
+typedef interface ICalculatorEv ICalculatorEv;
 
-#endif 	/* __ICalculator_FWD_DEFINED__ */
+#endif 	/* __ICalculatorEv_FWD_DEFINED__ */
 
 
 #ifndef ___ICalculatorEvents_FWD_DEFINED__
@@ -73,26 +69,45 @@ typedef struct Calculator Calculator;
 /* header files for imported files */
 #include "oaidl.h"
 #include "ocidl.h"
-#include "shobjidl.h"
 
 #ifdef __cplusplus
 extern "C"{
 #endif 
 
 
-#ifndef __ICalculator_INTERFACE_DEFINED__
-#define __ICalculator_INTERFACE_DEFINED__
 
-/* interface ICalculator */
+#ifndef __ScalableCalculatorCOMLib_LIBRARY_DEFINED__
+#define __ScalableCalculatorCOMLib_LIBRARY_DEFINED__
+
+/* library ScalableCalculatorCOMLib */
+/* [version][uuid] */ 
+
+typedef 
+enum Events
+    {
+        EVID_ADD	= 1,
+        EVID_SUBTRACT	= 2,
+        EVID_MULTIPLY	= 3,
+        EVID_DIVIDE	= 4,
+        EVID_NOTHING	= 5
+    } 	Events;
+
+
+EXTERN_C const IID LIBID_ScalableCalculatorCOMLib;
+
+#ifndef __ICalculatorEv_INTERFACE_DEFINED__
+#define __ICalculatorEv_INTERFACE_DEFINED__
+
+/* interface ICalculatorEv */
 /* [unique][nonextensible][dual][uuid][object] */ 
 
 
-EXTERN_C const IID IID_ICalculator;
+EXTERN_C const IID IID_ICalculatorEv;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
     MIDL_INTERFACE("7a11d31a-c3a9-44c3-b34d-fcc218b971c4")
-    ICalculator : public IDispatch
+    ICalculatorEv : public IDispatch
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Compute( 
@@ -105,34 +120,34 @@ EXTERN_C const IID IID_ICalculator;
     
 #else 	/* C style interface */
 
-    typedef struct ICalculatorVtbl
+    typedef struct ICalculatorEvVtbl
     {
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ICalculator * This,
+            ICalculatorEv * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ICalculator * This);
+            ICalculatorEv * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            ICalculator * This);
+            ICalculatorEv * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            ICalculator * This,
+            ICalculatorEv * This,
             /* [out] */ UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            ICalculator * This,
+            ICalculatorEv * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            ICalculator * This,
+            ICalculatorEv * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
@@ -140,7 +155,7 @@ EXTERN_C const IID IID_ICalculator;
             /* [size_is][out] */ DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ICalculator * This,
+            ICalculatorEv * This,
             /* [annotation][in] */ 
             _In_  DISPID dispIdMember,
             /* [annotation][in] */ 
@@ -159,17 +174,17 @@ EXTERN_C const IID IID_ICalculator;
             _Out_opt_  UINT *puArgErr);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Compute )( 
-            ICalculator * This,
+            ICalculatorEv * This,
             /* [in] */ CHAR action,
             /* [in] */ LONGLONG lhs,
             /* [in] */ LONGLONG rhs);
         
         END_INTERFACE
-    } ICalculatorVtbl;
+    } ICalculatorEvVtbl;
 
-    interface ICalculator
+    interface ICalculatorEv
     {
-        CONST_VTBL struct ICalculatorVtbl *lpVtbl;
+        CONST_VTBL struct ICalculatorEvVtbl *lpVtbl;
     };
 
     
@@ -177,30 +192,30 @@ EXTERN_C const IID IID_ICalculator;
 #ifdef COBJMACROS
 
 
-#define ICalculator_QueryInterface(This,riid,ppvObject)	\
+#define ICalculatorEv_QueryInterface(This,riid,ppvObject)	\
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define ICalculator_AddRef(This)	\
+#define ICalculatorEv_AddRef(This)	\
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define ICalculator_Release(This)	\
+#define ICalculatorEv_Release(This)	\
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define ICalculator_GetTypeInfoCount(This,pctinfo)	\
+#define ICalculatorEv_GetTypeInfoCount(This,pctinfo)	\
     ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
-#define ICalculator_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+#define ICalculatorEv_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
-#define ICalculator_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+#define ICalculatorEv_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
-#define ICalculator_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+#define ICalculatorEv_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
-#define ICalculator_Compute(This,action,lhs,rhs)	\
+#define ICalculatorEv_Compute(This,action,lhs,rhs)	\
     ( (This)->lpVtbl -> Compute(This,action,lhs,rhs) ) 
 
 #endif /* COBJMACROS */
@@ -211,28 +226,8 @@ EXTERN_C const IID IID_ICalculator;
 
 
 
-#endif 	/* __ICalculator_INTERFACE_DEFINED__ */
+#endif 	/* __ICalculatorEv_INTERFACE_DEFINED__ */
 
-
-
-#ifndef __ScalableCalculatorCOMEventsLib_LIBRARY_DEFINED__
-#define __ScalableCalculatorCOMEventsLib_LIBRARY_DEFINED__
-
-/* library ScalableCalculatorCOMEventsLib */
-/* [version][uuid] */ 
-
-typedef 
-enum Events
-    {
-        DISPID_ADD	= 1,
-        DISPID_SUBTRACT	= 2,
-        DISPID_MULTIPLY	= 3,
-        DISPID_DIVIDE	= 4,
-        DISPID_NOTHING	= 5
-    } 	Events;
-
-
-EXTERN_C const IID LIBID_ScalableCalculatorCOMEventsLib;
 
 #ifndef ___ICalculatorEvents_DISPINTERFACE_DEFINED__
 #define ___ICalculatorEvents_DISPINTERFACE_DEFINED__
@@ -356,7 +351,7 @@ EXTERN_C const CLSID CLSID_Calculator;
 class DECLSPEC_UUID("86d4af8c-ffdc-4317-b120-bf76fac5cd6f")
 Calculator;
 #endif
-#endif /* __ScalableCalculatorCOMEventsLib_LIBRARY_DEFINED__ */
+#endif /* __ScalableCalculatorCOMLib_LIBRARY_DEFINED__ */
 
 /* Additional Prototypes for ALL interfaces */
 
